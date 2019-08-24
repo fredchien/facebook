@@ -1,12 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 function PostItemHeader({ post }) {
   return (
-    <>
-      <img src={post.author.avatar} />
-      <div>{post.author.name}</div>
-    </>
+    <div className="post-header">
+      <img className="avatar" src={post.author.avatar} />
+      <div className="details">
+        <span>{post.author.name}</span>
+        <span>{post.date}</span>
+      </div>
+    </div>
   );
 }
 

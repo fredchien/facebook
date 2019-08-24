@@ -96,11 +96,11 @@ class PostList extends Component {
   render() {
     const { posts } = this.state;
     return (
-      <ul>
+      <div className="postlist">
         {posts.map(post => (
           <PostItem key={post.id} post={post} />
         ))}
-      </ul>
+      </div>
     );
   }
 }
