@@ -22,6 +22,8 @@ module.exports = {
       ...req.body
     });
 
+    req.io.emit("post", NewPost);
+
     return res.json(NewPost);
   }
 };
