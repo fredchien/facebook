@@ -17,7 +17,16 @@ module.exports = {
 
     await TargetPost.save();
 
-    req.io.emit("comment", TargetPost);
+    const IoComment = await Post.findById(TargetPost._id)
+      .populate("author", { name: 1, avatar: 1 })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author"
+        }
+      });
+
+    req.io.emit("comment", IoComment);
 
     return res.json(TargetPost);
   }

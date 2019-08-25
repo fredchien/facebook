@@ -9,7 +9,8 @@ module.exports = {
         populate: {
           path: "author"
         }
-      });
+      })
+      .sort("-createdAt");
 
     return res.json(Posts);
   },
@@ -22,7 +23,16 @@ module.exports = {
       ...req.body
     });
 
-    req.io.emit("post", NewPost);
+    const IoPost = await Post.findById(NewPost._id)
+      .populate("author", { name: 1, avatar: 1 })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author"
+        }
+      });
+
+    req.io.emit("post", IoPost);
 
     return res.json(NewPost);
   }
